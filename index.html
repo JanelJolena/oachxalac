@@ -39,13 +39,13 @@
     .typing-text {
       font-size: 1.8rem;
       color: #444;
-      white-space: nowrap;
-      overflow: hidden;
+      white-space: normal; /* cho phép xuống dòng */
+      overflow: visible;   /* hiện hết */
       border-right: 2px solid #ff69b4;
-      width: 0;
+      width: 90vw;
+      max-width: 400px;
+      margin: 0 auto 40px;
       animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
-      max-width: 100%;
-      margin-bottom: 40px;
     }
     @keyframes typing {
       from { width: 0; }
@@ -257,22 +257,23 @@
   <!-- Main -->
   <section id="main-section" style="display:none;">
     <h1>✨ Tiệm Cafe lời chúc ✨</h1>
+    <p>bấm vào từng cái là 1 lời chúc nghen</p>
     <div class="energy-station">
       <div class="drink" onclick="toggleMessage(this)">
         <h3>🧋 Trà Sữa Tự Tin</h3>
-        <div class="message">Tăng 200% sự tự tin cho bài thi mọi loại môn cho bạn Như Ý nghen!!</div>
+        <div class="message">Tăng 200% sự tự tin cho bài thi mọi loại môn cho bạn Như Ý, chúc m luôn tự tin nghen!!</div>
       </div>
       <div class="drink" onclick="toggleMessage(this)">
         <h3>☕ Cà Phê Logic</h3>
-        <div class="message">Uống vô não hoạt động ở tần số max luôn này 😎</div>
+        <div class="message">Uống vô não hoạt động ở tần số max luôn này 😎, chúc m luôn giữ gìn sức khỏe nhé</div>
       </div>
       <div class="drink" onclick="toggleMessage(this)">
         <h3>🍵 Matcha Tĩnh Tâm</h3>
-        <div class="message">Cho tâm trí mát mẽ trước khi thi đấy!!!1!!!!</div>
+        <div class="message">Cho tâm trí mát mẽ trước khi thi đấy!!!1!!!!, chúc m luôn vui vẻ để làm bài đó buồn thì có tui</div>
       </div>
       <div class="drink" onclick="toggleMessage(this)">
         <h3>🥤 Soda Vượt Chướng Ngại</h3>
-        <div class="message">Không gì có thể làm khó đc gx skibidi bombardini hedgehogini</div>
+        <div class="message">Không gì có thể làm khó đc gx kkk skibidi bombardini hedgehogini</div>
       </div>
     </div>
     <button class="bigbang-btn" onclick="showBigBang()">LỜI CHÚC SIÊU TOOO</button>
@@ -363,7 +364,7 @@
     el.style.transform = 'scale(1.2)';
     el.style.opacity = '0';
     setTimeout(() => {
-      el.innerText = 'Chúc m tự tin và bình tĩnh trong bài thi. Dù kết quả thế nào, hãy nhớ rằng sự cố gắng của bạn đã rất tuyệt vời rồi cố lên nhiée, thành công đang chờ ở phía trước! T tin m sẽ đạt được kết quả cao nhất, fighting fightinggg nhé hihi let\'s go ko có cái nóng nào bằng cái nóng lòng đc gặp e';
+      el.innerText = "Chúc m tự tin và bình tĩnh trong bài thi. Dù kết quả thế nào, hãy nhớ rằng sự cố gắng của bạn đã rất tuyệt vời rồi cố lên nhiée, sắp đậu r đó. T tin m sẽ đạt được kết quả cao nhất, fighting fightinggg nhé hihi let's go ko có cái nóng nào bằng cái nóng lòng đc gặp e";
       el.style.transform = 'scale(1)';
       el.style.opacity = '1';
       el.style.color = '#ffffff';
