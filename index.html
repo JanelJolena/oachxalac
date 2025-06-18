@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1 lời chúc cho gờ ích</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to bottom, #fceff9, #ffe6f0);
+      color: #333;
+      overflow-x: hidden;
+      height: 100%;
+    }
+    button {
+      font-family: inherit;
+    }
+
+    /* Cổng vào */
+    #gate-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to bottom, #e0f7fa, #ffe6f0);
+      text-align: center;
+      padding: 0 20px;
+    }
+    .typing-text {
+      font-size: 1.8rem;
+      color: #444;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #ff69b4;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+      max-width: 100%;
+      margin-bottom: 40px;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .enter-btn {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 25px;
+      background: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      max-width: 90vw;
+    }
+    .enter-btn:hover {
+      background: #ff4094;
+    }
+
+    /* Main container */
+    #main-section {
+      display: none;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.8s ease;
+    }
+    h1 {
+      font-size: 2.5rem;
+      animation: float 3s ease-in-out infinite;
+      text-align: center;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .energy-station {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+    }
+    .drink {
+      background: #fff0f6;
+      border: 2px dashed #ff8ebf;
+      padding: 20px;
+      border-radius: 16px;
+      width: 220px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .drink:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 102, 153, 0.3);
+    }
+    .message {
+      display: none;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .bigbang-btn {
+      margin-top: 40px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      background: #ff5eab;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      max-width: 90vw;
+    }
+    .bigbang-btn:hover {
+      background: #ff3e91;
+    }
+
+    /* BigBang styles */
+    #bigbang-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at center, #0b001d, #12022f);
+      color: #ffb3ec;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+      transition: opacity 1s ease;
+      width: 100%;
+      text-align: center;
+    }
+    #bigbang-text {
+      font-size: 2.8rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      z-index: 10;
+      text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+      max-width: 90vw;
+      margin: auto;
+    }
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      animation: explode 1.2s ease-out forwards;
+      z-index: 5;
+    }
+    @keyframes explode {
+      0% {
+        transform: translate(0,0) scale(1);
+        opacity: 1;
+      }
+      80% {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Shooting stars */
+    .shooting-star {
+      position: fixed;
+      top: -10px;
+      width: 3px;
+      height: 80px;
+      background: linear-gradient(45deg, white, rgba(255,255,255,0));
+      filter: drop-shadow(0 0 6px white);
+      opacity: 0.8;
+      border-radius: 50%;
+      animation-name: shooting;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      pointer-events: none;
+      z-index: 1000;
+      transform-origin: top right;
+    }
+    @keyframes shooting {
+      0% {
+        transform: translateX(0) translateY(0) rotate(-45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(var(--x)) translateY(var(--y)) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .typing-text {
+        font-size: 1.2rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .drink {
+        width: 90vw;
+      }
+      .bigbang-btn {
+        width: 90vw;
+      }
+      #bigbang-text {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nhạc chill nền -->
+  <audio id="chillMusic" src="cute1.m4a" loop autoplay></audio>
+
+  <!-- Hiệu ứng sound effect pháo hoa -->
+  <audio id="fireworkSound" src="firework.mp3"></audio>
+
+  <!-- Nhạc nền Big Bang -->
+  <audio id="bgMusic" src="song.mp3" loop></audio>
+
+  <!-- Gate -->
+  <section id="gate-section">
+    <div class="typing-text">
+      Một tý lời chúc t muốn chúc m cho kì thi hí hí
+    </div>
+    <button class="enter-btn" onclick="enterWorld()">Bắt đầu thoai!!</button>
+  </section>
+
+  <!-- Main -->
+  <section id="main-section" style="display:none;">
+    <h1>✨ Tiệm Cafe lời chúc ✨</h1>
+    <div class="energy-station">
+      <div class="drink" onclick="toggleMessage(this)">
+        <h3>🧋 Trà Sữa Tự Tin</h3>
+        <div class="message">Tăng 200% sự tự tin cho bài thi mọi loại môn cho bạn Như Ý nghen!!</div>
+      </div>
+      <div class="drink" onclick="toggleMessage(this)">
+        <h3>☕ Cà Phê Logic</h3>
+        <div class="message">Uống vô não hoạt động ở tần số max luôn này 😎</div>
+      </div>
+      <div class="drink" onclick="toggleMessage(this)">
+        <h3>🍵 Matcha Tĩnh Tâm</h3>
+        <div class="message">Cho tâm trí mát mẽ trước khi thi đấy!!!1!!!!</div>
+      </div>
+      <div class="drink" onclick="toggleMessage(this)">
+        <h3>🥤 Soda Vượt Chướng Ngại</h3>
+        <div class="message">Không gì có thể làm khó đc gx skibidi bombardini hedgehogini</div>
+      </div>
+    </div>
+    <button class="bigbang-btn" onclick="showBigBang()">LỜI CHÚC SIÊU TOOO</button>
+  </section>
+
+  <!-- Big Bang -->
+  <section id="bigbang-section" style="display:none;">
+    <div id="bigbang-text" onclick="blast(event)">Bấm vào thử đi bùm bùm 😛</div>
+  </section>
+
+<script>
+  const chillMusic = document.getElementById('chillMusic');
+  const bgMusic = document.getElementById('bgMusic');
+  const fireworkSound = document.getElementById('fireworkSound');
+
+  function enterWorld() {
+    document.getElementById('gate-section').style.display = 'none';
+    document.getElementById('main-section').style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    chillMusic.play().catch(() => {});
+  }
+
+  function toggleMessage(el) {
+    const msg = el.querySelector('.message');
+    msg.style.display = msg.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function showBigBang() {
+    document.getElementById('main-section').style.display = 'none';
+    const bb = document.getElementById('bigbang-section');
+    bb.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    chillMusic.pause();
+    chillMusic.currentTime = 0;
+  }
+
+  function createShootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('shooting-star');
+    star.style.left = (Math.random() * window.innerWidth * 0.6 + window.innerWidth * 0.4) + 'px';
+    star.style.setProperty('--x', (-Math.random() * 400 - 300) + 'px');
+    star.style.setProperty('--y', (Math.random() * 800 + 600) + 'px');
+    star.style.animationDuration = (Math.random() * 1 + 1.5) + 's';
+    document.body.appendChild(star);
+    setTimeout(() => {
+      star.remove();
+    }, 4000);
+  }
+
+  let shootingInterval;
+  function startShootingStars() {
+    if (shootingInterval) return;
+    shootingInterval = setInterval(createShootingStar, 300);
+  }
+
+  let transformed = false;
+  function blast(e) {
+    if (transformed) return;
+    transformed = true;
+    const el = e.target;
+
+    // Phát nhạc nền big bang
+    bgMusic.play().catch(() => {
+      console.log('Autoplay bị chặn, cần tương tác thêm');
+    });
+
+    // Phát sound effect pháo hoa
+    fireworkSound.pause();
+    fireworkSound.currentTime = 0;
+    fireworkSound.play().catch(() => {
+      console.log('Autoplay sound effect pháo hoa bị chặn');
+    });
+
+    for (let i = 0; i < 80; i++) {
+      const f = document.createElement('div');
+      f.className = 'firework';
+      f.style.left = e.clientX + 'px';
+      f.style.top = e.clientY + 'px';
+      const x = (Math.random() - 0.5) * 1200 + 'px';
+      const y = (Math.random() - 0.5) * 800 + 'px';
+      f.style.setProperty('--x', x);
+      f.style.setProperty('--y', y);
+      f.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      document.body.appendChild(f);
+      setTimeout(() => f.remove(), 1500);
+    }
+
+    el.style.transform = 'scale(1.2)';
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.innerText = 'Chúc m tự tin và bình tĩnh trong bài thi. Dù kết quả thế nào, hãy nhớ rằng sự cố gắng của bạn đã rất tuyệt vời rồi cố lên nhiée, thành công đang chờ ở phía trước! T tin m sẽ đạt được kết quả cao nhất, fighting fightinggg nhé hihi let\'s go ko có cái nóng nào bằng cái nóng lòng đc gặp e';
+      el.style.transform = 'scale(1)';
+      el.style.opacity = '1';
+      el.style.color = '#ffffff';
+      el.style.textShadow = '0 0 15px #ff69b4, 0 0 30px #ff69b4, 0 0 45px #ff69b4';
+      startShootingStars();
+    }, 700);
+  }
+</script>
+</body>
+</html>
